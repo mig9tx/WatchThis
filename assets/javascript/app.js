@@ -73,11 +73,11 @@ $(document).ready(function () {
     }
 
 
-    $('#movie-choice').on('click', function () {
+    $(document).on('click', '#movie-choice', function () {
         displayMovieGenreButtons();
     });
 
-    $('#tv-choice').on('click', function () {
+    $(document).on('click', '#tv-choice', function () {
         displayTvGenreButtons();
     });
 
