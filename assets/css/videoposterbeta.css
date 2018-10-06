@@ -1,0 +1,22 @@
+body {
+
+}
+
+.container {
+    font-family: 'Notable', sans-serif;
+	background: rgba(0,0,0,0.8);
+	color: #fffff0;
+    padding: 30px;
+    font-size: 20px;
+    letter-spacing: 3px;
+    opacity: .8;
+}
+
+#button-area {
+    background-color: #05d6d9;
+    background-image: linear-gradient(315deg, #05d6d9 0%, #b621fe 74%);
+    padding: 20px 38px;
+    font-size: 30px;
+    font-family: 'Notable', sans-serif;
+    color: #fffff0;
+}
