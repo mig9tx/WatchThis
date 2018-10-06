@@ -40,10 +40,6 @@ $(document).ready(function () {
         $('#button-area').append(tvChoiceButton);
     }
 
-    $('#start-button').on('click', function () {
-        displayMovieOrTv();
-    });
-
     function displayMovieGenreButtons() {
         $('#button-area').empty();
         for (var i = 0; i < popularMovieGenres.length; i++) {
@@ -120,7 +116,21 @@ $(document).ready(function () {
         }
     }
 
+    function getGenreData(btn) {
+        var genreData = $(btn).attr('data-id');
+        console.log(genreData);
+    }
+
+    function getDecadeData(btn) {
+        var decadeData = $(btn).attr('data-id');
+        console.log(decadeData);
+    }
+
     //CLICK EVENTS
+
+    $('#start-button').on('click', function () {
+        displayMovieOrTv();
+    });
 
     $(document).on('click', '#movie-choice', function () {
         displayMovieGenreButtons();
@@ -138,12 +148,12 @@ $(document).ready(function () {
         displayAllTvGenres();
     });
 
-    function getGenreData(btn) {
-        var genreData = $(btn).attr('data-id');
-        console.log(genreData);
-    }
+    $(document).on('click', '.movieGenreButtons', function () {
+        getGenreData(this);
 
-    $(document).on('click', '.tvGenreButtons', '.movieGenreButtons', function () {
+    });     
+
+    $(document).on('click', '.tvGenreButtons', function () {
         getGenreData(this);
 
     });
@@ -156,6 +166,10 @@ $(document).ready(function () {
         displayMovieDecadeButtons();
     });
 
+    $(document).on('click', '.decade-buttons', function () {
+        getDecadeData(this);
+
+    });
 
     //intro screen
     //brief description of app
