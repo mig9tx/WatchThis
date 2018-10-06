@@ -194,3 +194,25 @@ var allTvGenres = [{
         name: "Western"
     }
 ]
+
+var decades = [{
+        id: "release_date.gte=1950-01-01&release_date.lte=1979-12-30",
+        name: 'Classics'
+    },
+    {
+        id: "release_date.gte=1980-01-01&release_date.lte=1989-12-30",
+        name: '80s'
+    },
+    {
+        id: "release_date.gte=1990-01-01&release_date.lte=1999-12-30",
+        name: '90s'
+    },
+    {
+        id: "release_date.gte=2000-01-01&release_date.lte=2009-12-30",
+        name: '2000s'
+    },
+    {
+        id: "release_date.gte=2010-01-01&release_date.lte=2019-12-30",
+        name: '2010s'
+    }
+]
