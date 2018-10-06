@@ -23,25 +23,45 @@
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
             <img src="./assets/images/logo.jpg" width="40" height="40" class="d-inline-block align-top" alt="">
-            
+
         </a>
         <p class="navbar-text">Movie Finder</p>
     </nav>
 
+    <div class='container'>
+        <table id="table">Table
+            <thead>thead
+                <tr>
+                    <th id="poster">Poster</th>
+                    <th id="title">Title</th>
+                    <th id="releaseDate">Released </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
     <!-- Body Text -->
+
     
     <div class="wrapper">
         <button class="button" id="movie-button" >Movies</button>
         <button class="button" id="tv-button">TV Shows</button>
+
+    <div class="container" id='main-content'> 
+        <div class="wrapper" id='button-area'></div>
+
+
     </div>
     
     <!-- Firebase Reference -->
-    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script> -->
 
     <!-- jQuery Reference -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- JavaScript File Reference -->
+    <script src="./assets/javascript/GenresAndDecadeslist.js"></script>
     <script src="./assets/javascript/app.js"></script>
 </body>
 
