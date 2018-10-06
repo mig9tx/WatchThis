@@ -14,12 +14,6 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
 
-    var popularMovieGenres = ['Action', 'Cartoon', 'Drama', 'Horror', 'Romance', 'Comedy', 'Documentary', 'Animation'];
-    var allMovieGenres = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'];
-
-    var popularTvGenres = ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Reality'];
-    var allTvGenres = ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western'];
-
     function initialPage() {
         $('#button-area').empty();
         var startButton = $('<button>');
@@ -57,9 +51,9 @@ $(document).ready(function () {
         $('#button-area').empty();
         for (var i = 0; i < popularMovieGenres.length; i++) {
             var genreButton = $('<button>');
-            genreButton.addClass('button');
-            genreButton.attr('data-name', popularMovieGenres[i]);
-            genreButton.text(popularMovieGenres[i]);
+            genreButton.addClass('button genre-buttons');
+            genreButton.attr('data-id', popularMovieGenres[i].id);
+            genreButton.text(popularMovieGenres[i].name);
             $('#button-area').append(genreButton);
         }
 
@@ -69,9 +63,9 @@ $(document).ready(function () {
         $('#button-area').empty();
         for (var i = 0; i < popularTvGenres.length; i++) {
             var genreButton = $('<button>');
-            genreButton.addClass('button');
-            genreButton.attr('data-name', popularTvGenres[i]);
-            genreButton.text(popularTvGenres[i]);
+            genreButton.addClass('button genre-buttons');
+            genreButton.attr('data-id', popularTvGenres[i].id);
+            genreButton.text(popularTvGenres[i].name);
             $('#button-area').append(genreButton);
         }
     }
@@ -85,27 +79,18 @@ $(document).ready(function () {
         displayTvGenreButtons();
     });
 
-    // var movieId = "363088";
-    // var decade = "release_date.gte=1980-01-01&release_date.lte=1989-12-30"
-    // //Genre Ids:
-    // // 
-    // var genreId = "35"
 
-    // // query that searches for movies in a specific decade and genre
-    // $.ajax({
-    //     url: "https://api.themoviedb.org/3/discover/movie?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&" + decade + "&with_genres=" + genreId + "",
-    //     method: "GET"
-    // }).then(function (response5) {
-    //     console.log(response5);
-    // });
-    // // query that searches for tv show based on genre
-    // $.ajax({
-    //     url: "https://api.themoviedb.org/3/discover/tv?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genreId + "",
+    function getGenreData(btn) {
+        var genreData = $(btn).attr('data-id'); //can't get data-name
+        // Here we can add api url and push 'data-name' into the url and pull specific genre.
+        console.log(genreData);
+    }
 
-    //     method: "GET"
-    // }).then(function (response2) {
-    //     console.log(response2);
-    // });
+    $(document).on('click', '.genre-buttons', function () {
+        getGenreData(this);
+    });
+
+
 
     //intro screen
     //brief description of app
