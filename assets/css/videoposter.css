@@ -1,0 +1,125 @@
+body {
+	margin: 0;
+	background: #000; 
+}
+
+#clickbox { 
+    text-align: center;
+	font-family: 'Notable', sans-serif;
+	background: rgba(0,0,0,0.5);
+	color: #fffff0;
+    padding: 30px;
+	margin: 56px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    width: 40%;
+}
+
+h1 {
+    background: -webkit-linear-gradient(#eee,#FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 0;
+    font-size: 48px;
+    letter-spacing: 4.8px;
+    text-align: center;
+    text-transform: uppercase;
+  }  
+
+button {
+    background: #FFD700;
+    display: inline-block;
+    position: relative;
+    padding: 20px 38px;
+    top: 0;
+    font-size: 30px;
+    font-family: 'Notable', sans-serif;
+    color: #fffff0;
+    opacity: .9;
+    box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.1 );
+    -webkit-transform: translateZ(0);
+       -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-transition: all 0.2s ease;
+       -moz-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+}
+  
+button:hover {
+    top: -7px;
+    box-shadow: 0px 10px 10px rgba( 15, 165, 60, 0.2 );
+    -webkit-transform: rotateX(20deg);
+       -moz-transform: rotateX(20deg);
+        -ms-transform: rotateX(20deg);
+            transform: rotateX(20deg);
+            background: rgba(0,0,0,0);
+	color: #fffff0;
+	box-shadow: inset 0 0 0 3px #FFD700;
+}
+  
+button:active {
+    top: 0px;
+    box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
+    background: #FFD700;
+}
+
+video { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    transition: 1s opacity;
+}
+
+.stopfade {
+    opacity: .9;
+}
+
+.footer {
+	position: fixed;
+    margin-top: 10px;
+	padding-top: 38px;
+	width: 100%;
+	height: 15%;
+    background: rgba(0,0,0,0.5);
+	border-top-style: solid;
+	border-top-color: #FFD700;
+    border-top-width: 10px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    
+    font-family: 'Notable', sans-serif;
+    color: #fffff0;
+}
+
+/* unvisited link */
+a:link {
+    color: #fffff0;
+}
+
+/* visited link */
+a:visited {
+    color: #fffff0;
+}
+
+/* mouse over link */
+a:hover {
+    color: #ffd700;
+}
+
+/* selected link */
+a:active {
+    color: #ffd700;
+}
+
+@media screen and (max-width: 500px) { 
+  div{width:70%;} 
+}
+
