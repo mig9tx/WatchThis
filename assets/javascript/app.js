@@ -1,18 +1,14 @@
-
-
-
-
 $(document).ready(function () {
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyC9tSko0pe-mNXsTob_IUpRhxJFbPSkQiM",
-        authDomain: "groupproject1-56d7d.firebaseapp.com",
-        databaseURL: "https://groupproject1-56d7d.firebaseio.com",
-        projectId: "groupproject1-56d7d",
-        storageBucket: "groupproject1-56d7d.appspot.com",
-        messagingSenderId: "93264815531"
-    };
-    firebase.initializeApp(config);
+    // // Initialize Firebase
+    // var config = {
+    //     apiKey: "AIzaSyC9tSko0pe-mNXsTob_IUpRhxJFbPSkQiM",
+    //     authDomain: "groupproject1-56d7d.firebaseapp.com",
+    //     databaseURL: "https://groupproject1-56d7d.firebaseio.com",
+    //     projectId: "groupproject1-56d7d",
+    //     storageBucket: "groupproject1-56d7d.appspot.com",
+    //     messagingSenderId: "93264815531"
+    // };
+    // firebase.initializeApp(config);
 
     function initialPage() {
         $('#button-area').empty();
@@ -56,7 +52,11 @@ $(document).ready(function () {
             genreButton.text(popularMovieGenres[i].name);
             $('#button-area').append(genreButton);
         }
-
+        var allMovieGenresButton = $('<button>');
+        allMovieGenresButton.addClass('button genre-buttons');
+        allMovieGenresButton.attr('id', 'movieGenres')
+        allMovieGenresButton.text('More Genres');
+        $('#button-area').append(allMovieGenresButton);
     }
 
     function displayTvGenreButtons() {
@@ -68,8 +68,34 @@ $(document).ready(function () {
             genreButton.text(popularTvGenres[i].name);
             $('#button-area').append(genreButton);
         }
+        var allTvGenresButton = $('<button>');
+        allTvGenresButton.addClass('button genre-buttons');
+        allTvGenresButton.attr('id', 'tvGenres')
+        allTvGenresButton.text('More Genres');
+        $('#button-area').append(allTvGenresButton);
     }
 
+    function displayAllMovieGenres() {
+        $('#button-area').empty();
+        for (var i = 0; i < allMovieGenres.length; i++) {
+            var allGenresButton = $('<button>');
+            allGenresButton.addClass('button genre-buttons');
+            allGenresButton.attr('data-id', allMovieGenres[i].id);
+            allGenresButton.text(allMovieGenres[i].name);
+            $('#button-area').append(allGenresButton);
+        }
+    }
+
+    function displayAllTvGenres() {
+        $('#button-area').empty();
+        for (var i = 0; i < allTvGenres.length; i++) {
+            var allGenresButton = $('<button>');
+            allGenresButton.addClass('button genre-buttons');
+            allGenresButton.attr('data-id', allTvGenres[i].id);
+            allGenresButton.text(allTvGenres[i].name);
+            $('#button-area').append(allGenresButton);
+        }
+    }
 
     $(document).on('click', '#movie-choice', function () {
         displayMovieGenreButtons();
@@ -79,6 +105,13 @@ $(document).ready(function () {
         displayTvGenreButtons();
     });
 
+    $(document).on('click', '#movieGenres', function () {
+        displayAllMovieGenres();
+    });
+
+    $(document).on('click', '#tvGenres', function () {
+        displayAllTvGenres();
+    });
 
     function getGenreData(btn) {
         var genreData = $(btn).attr('data-id'); //can't get data-name
