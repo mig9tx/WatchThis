@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    // // Initialize Firebase
+
+    // Initialize Firebase
     // var config = {
     //     apiKey: "AIzaSyC9tSko0pe-mNXsTob_IUpRhxJFbPSkQiM",
     //     authDomain: "groupproject1-56d7d.firebaseapp.com",
@@ -11,6 +12,7 @@ $(document).ready(function () {
     // firebase.initializeApp(config);
 
     // FUNCTIONS
+
     function initialPage() {
         $('#button-area').empty();
         var startButton = $('<button>');
@@ -197,7 +199,8 @@ $(document).ready(function () {
     //displayed as buttons with images of the posters
 
     var movieId = "105";
-    var decade = "release_date.gte=1990-01-01&release_date.lte=1999-12-30";
+    var decade = "release_date.gte=1980-01-01&release_date.lte=1989-12-30";
+    
     //Genre Ids:
     // 
     var genreId = "35";
@@ -205,16 +208,16 @@ $(document).ready(function () {
 
     // query that searches for movies in a specific decade and genre
     $.ajax({
-        url: "https://api.themoviedb.org/3/discover/movie?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&" + decade + "&with_genres=" + genreId + "",
+        url: "https://api.themoviedb.org/3/discover/movie?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=10&" + decade + "&with_genres=" + genreId + "",
         method: "GET"
     }).then(function (response5) {
-        // for (i = 0; i < response5.length; i++) {
+        for (i = 0; i < response5.results.length; i++) {
         var row = $("<tr>");
-        row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/'" + response5.results[0].poster_path + "'</img></td>");
-        row.append("<td>" + response5.results[0].title + "</td>");
-        row.append("<td>" + response5.results[0].release_date + "</td>");
+        row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + response5.results[i].poster_path + "'width='60px' length='90px'>'</img></td>");
+        row.append("<td>" + response5.results[i].title + "</td>");
+        row.append("<td>" + response5.results[i].release_date + "</td>");
         $('tbody').append(row);
-        // }
+        
         console.log(response5.results[0].poster_path); //poster
         console.log(response5.results[0].title); //movie title
         console.log(response5.results[0].release_date); //release date
@@ -222,6 +225,7 @@ $(document).ready(function () {
         console.log(response5.results[0].id); //movie id to be used to pull more information about the movie
 
         console.log(response5);
+        }
     });
 
     // gets a list of credits where we can obtain the list of actors in a specific movie
