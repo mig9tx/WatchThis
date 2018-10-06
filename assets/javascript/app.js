@@ -1,10 +1,4 @@
-$(document).ready(function) {
-    function initialize() {
-        var button = $"#ID"
-    }
-}
-
-var movieId = "363088";
+var movieId = "105";
     var decade = "release_date.gte=1980-01-01&release_date.lte=1989-12-30"
     //Genre Ids:
         // 
@@ -15,8 +9,31 @@ $.ajax({
     url: "https://api.themoviedb.org/3/discover/movie?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&" + decade + "&with_genres=" + genreId + "",
     method: "GET"
 }).then(function (response5) {
+    console.log(response5.results[0].poster_path); //poster
+    console.log(response5.results[0].title);//movie title
+    console.log(response5.results[0].release_date);//release date
+    console.log(response5.results[0].overview);//overview
+    console.log(response5.results[0].id);//movie id to be used to pull more information about the movie
+    
     console.log(response5);
 });
+
+// gets a list of credits where we can obtain the list of actors in a specific movie
+$.ajax({
+    url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=de7bfe759d702ca3a0225b7b3285f2b3",
+    method: "GET"
+}).then(function (movieInfo) {
+    console.log(movieInfo.cast[0].name);
+    console.log(movieInfo.cast[1].name);
+    console.log(movieInfo.cast[2].name);
+    console.log(movieInfo.cast[3].name);
+    console.log(movieInfo.cast[4].name);
+    console.log(movieInfo);
+});
+
+
+
+
 // query that searches for tv show based on genre
 $.ajax({
     url: "https://api.themoviedb.org/3/discover/tv?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genreId+ "",
@@ -25,6 +42,17 @@ $.ajax({
 }).then(function (response2) {
     console.log(response2);
 });
+
+
+//Url for the movie poster https://image.tmdb.org/t/p/w600_and_h900_bestv2/pTpxQB1N0waaSc3OSn0e9oc8kx9.jpg
+//Obtain url .jpg link from array of results results[i].poster_path
+
+
+
+
+
+
+
 
 //intro screen
     //brief description of app
