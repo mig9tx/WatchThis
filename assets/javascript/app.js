@@ -1,8 +1,5 @@
-
-
-
-
 $(document).ready(function () {
+
     // Initialize Firebase
     // var config = {
     //     apiKey: "AIzaSyC9tSko0pe-mNXsTob_IUpRhxJFbPSkQiM",
@@ -13,6 +10,8 @@ $(document).ready(function () {
     //     messagingSenderId: "93264815531"
     // };
     // firebase.initializeApp(config);
+
+    // FUNCTIONS
 
     function initialPage() {
         $('#button-area').empty();
@@ -43,33 +42,97 @@ $(document).ready(function () {
         $('#button-area').append(tvChoiceButton);
     }
 
-    $('#start-button').on('click', function () {
-        displayMovieOrTv();
-    });
-
     function displayMovieGenreButtons() {
         $('#button-area').empty();
         for (var i = 0; i < popularMovieGenres.length; i++) {
             var genreButton = $('<button>');
-            genreButton.addClass('button genre-buttons');
+            genreButton.addClass('button movieGenreButtons');
             genreButton.attr('data-id', popularMovieGenres[i].id);
             genreButton.text(popularMovieGenres[i].name);
             $('#button-area').append(genreButton);
         }
-
+        var allMovieGenresButton = $('<button>');
+        allMovieGenresButton.addClass('button');
+        allMovieGenresButton.attr('id', 'movieGenres')
+        allMovieGenresButton.text('More Genres');
+        $('#button-area').append(allMovieGenresButton);
     }
 
     function displayTvGenreButtons() {
         $('#button-area').empty();
         for (var i = 0; i < popularTvGenres.length; i++) {
             var genreButton = $('<button>');
-            genreButton.addClass('button genre-buttons');
+            genreButton.addClass('button tvGenreButtons');
             genreButton.attr('data-id', popularTvGenres[i].id);
             genreButton.text(popularTvGenres[i].name);
             $('#button-area').append(genreButton);
         }
+        var allTvGenresButton = $('<button>');
+        allTvGenresButton.addClass('button');
+        allTvGenresButton.attr('id', 'tvGenres')
+        allTvGenresButton.text('More Genres');
+        $('#button-area').append(allTvGenresButton);
     }
 
+    function displayAllMovieGenres() {
+        $('#button-area').empty();
+        for (var i = 0; i < allMovieGenres.length; i++) {
+            var allGenresButton = $('<button>');
+            allGenresButton.addClass('button movieGenreButtons');
+            allGenresButton.attr('data-id', allMovieGenres[i].id);
+            allGenresButton.text(allMovieGenres[i].name);
+            $('#button-area').append(allGenresButton);
+        }
+    }
+
+    function displayAllTvGenres() {
+        $('#button-area').empty();
+        for (var i = 0; i < allTvGenres.length; i++) {
+            var allGenresButton = $('<button>');
+            allGenresButton.addClass('button tvGenreButtons');
+            allGenresButton.attr('data-id', allTvGenres[i].id);
+            allGenresButton.text(allTvGenres[i].name);
+            $('#button-area').append(allGenresButton);
+        }
+    }
+
+    function displayMovieDecadeButtons() {
+        $('#button-area').empty();
+        for (var i = 0; i < decades.length; i++) {
+            var decadeButtons = $('<button>');
+            decadeButtons.addClass('button decade-buttons');
+            decadeButtons.attr('data-id', decades[i].id);
+            decadeButtons.text(decades[i].name); 
+            $('#button-area').append(decadeButtons);
+        }
+    }
+
+    function displayTvDecadeButtons() {
+        $('#button-area').empty();
+        for (var i = 2; i < decades.length; i++) {
+            var decadeButtons = $('<button>');
+            decadeButtons.addClass('button decade-buttons');
+            decadeButtons.attr('data-id', decades[i].id);
+            decadeButtons.text(decades[i].name);
+            $('#button-area').append(decadeButtons);
+        }
+    }
+
+    function getGenreData(btn) {
+        var genreData = $(btn).attr('data-id');
+        console.log(genreData);
+    }
+
+    function getDecadeData(btn) {
+        var decadeData = $(btn).attr('data-id');
+        console.log(decadeData);
+    }
+
+    //CLICK EVENTS
+
+    $('#start-button').on('click', function () {
+        displayMovieOrTv();
+    });
 
     $(document).on('click', '#movie-choice', function () {
         displayMovieGenreButtons();
@@ -79,18 +142,36 @@ $(document).ready(function () {
         displayTvGenreButtons();
     });
 
-
-    function getGenreData(btn) {
-        var genreData = $(btn).attr('data-id'); //can't get data-name
-        // Here we can add api url and push 'data-name' into the url and pull specific genre.
-        console.log(genreData);
-    }
-
-    $(document).on('click', '.genre-buttons', function () {
-        getGenreData(this);
+    $(document).on('click', '#movieGenres', function () {
+        displayAllMovieGenres();
     });
 
+    $(document).on('click', '#tvGenres', function () {
+        displayAllTvGenres();
+    });
 
+    $(document).on('click', '.movieGenreButtons', function () {
+        getGenreData(this);
+
+    });     
+
+    $(document).on('click', '.tvGenreButtons', function () {
+        getGenreData(this);
+
+    });
+
+    $(document).on('click', '.tvGenreButtons', function(){
+        displayTvDecadeButtons();
+    });
+
+    $(document).on('click', '.movieGenreButtons', function(){
+        displayMovieDecadeButtons();
+    });
+
+    $(document).on('click', '.decade-buttons', function () {
+        getDecadeData(this);
+
+    });
 
     //intro screen
     //brief description of app
