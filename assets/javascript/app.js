@@ -10,12 +10,6 @@ $(document).ready(function () {
     };
     firebase.initializeApp(config);
 
-    var popularMovieGenres = ['Action', 'Cartoon', 'Drama', 'Horror', 'Romance', 'Comedy', 'Documentary', 'Animation'];
-    var allMovieGenres = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'];
-
-    var popularTvGenres = ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Reality'];
-    var allTvGenres = ['Action & Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi & Fantasy', 'Soap', 'Talk', 'War & Politics', 'Western'];
-
     function initialPage() {
         $('#button-area').empty();
         var startButton = $('<button>');
@@ -53,9 +47,9 @@ $(document).ready(function () {
         $('#button-area').empty();
         for (var i = 0; i < popularMovieGenres.length; i++) {
             var genreButton = $('<button>');
-            genreButton.addClass('button');
-            genreButton.attr('data-name', popularMovieGenres[i]);
-            genreButton.text(popularMovieGenres[i]);
+            genreButton.addClass('button genre-buttons');
+            genreButton.attr('data-id', popularMovieGenres[i].id);
+            genreButton.text(popularMovieGenres[i].name);
             $('#button-area').append(genreButton);
         }
 
@@ -65,9 +59,9 @@ $(document).ready(function () {
         $('#button-area').empty();
         for (var i = 0; i < popularTvGenres.length; i++) {
             var genreButton = $('<button>');
-            genreButton.addClass('button');
-            genreButton.attr('data-name', popularTvGenres[i]);
-            genreButton.text(popularTvGenres[i]);
+            genreButton.addClass('button genre-buttons');
+            genreButton.attr('data-id', popularTvGenres[i].id);
+            genreButton.text(popularTvGenres[i].name);
             $('#button-area').append(genreButton);
         }
     }
@@ -79,6 +73,16 @@ $(document).ready(function () {
 
     $(document).on('click', '#tv-choice', function () {
         displayTvGenreButtons();
+    });
+
+    function getGenreData(btn) {
+        var genreData = $(btn).attr('data-id'); //can't get data-name
+        // Here we can add api url and push 'data-name' into the url and pull specific genre.
+        console.log(genreData);
+    }
+
+    $(document).on('click', '.genre-buttons', function () {
+        getGenreData(this);
     });
 
     var movieId = "363088";
