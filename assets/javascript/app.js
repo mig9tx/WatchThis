@@ -208,7 +208,7 @@ $(document).ready(function () {
     var movieOrTv = "";
 
 
-    // query that searches for movies in a specific decade and genre
+    // query that searches for movies or tv shows in a specific decade and genre
     function getMovieData() {
         $.ajax({
             url: "https://api.themoviedb.org/3/discover/" + movieOrTv + "?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&" + decadeData + "&with_genres=" + genreData + "",
@@ -219,13 +219,22 @@ $(document).ready(function () {
                 var row = $("<tr class='castInfo'>");
                 var movieId = response5.results[i].id;
                 row.attr('movieId', movieId);
-                row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + response5.results[i].poster_path + "' width='60px' length='90px'></img></td>");
-                if (movieOrTv === "movie"){
-                row.append("<td>" + response5.results[i].title + "</td>");
-                row.append("<td>" + response5.results[i].release_date + "</td>");
-                }else {
+                row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2" + response5.results[i].poster_path + "' width='60px' length='90px'></img></td>");
+                if (movieOrTv === "movie") {
+                    row.append("<td>" + response5.results[i].title + "</td>");
+                    row.append("<td>" + response5.results[i].release_date + "</td>");
+                    row.attr('movieOrTvTitle', response5.results[i].title);
+                    row.attr('posterURL', 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + response5.results[i].poster_path);
+                    row.attr('overview', response5.results[i].overview);
+                    row.attr('date', response5.results[i].release_date);
+
+                } else {
                     row.append("<td>" + response5.results[i].name + "</td>");
                     row.append("<td>" + response5.results[i].first_air_date + "</td>");
+                    row.attr('movieOrTvTitle', response5.results[i].name);
+                    row.attr('posterURL', 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + response5.results[i].poster_path);
+                    row.attr('overview', response5.results[i].overview);
+                    row.attr('date', response5.results[i].first_air_date);
                 }
                 $('tbody').append(row);
                 console.log(response5.results[i].poster_path); //poster
@@ -247,6 +256,7 @@ $(document).ready(function () {
     // gets a list of credits where we can obtain the list of actors in a specific movie
     function getCreditsData(movieRow) {
         var movieId = $(movieRow).attr('movieId');
+        var title = $(movieRow).attr("movieOrTvTitle");
         $.ajax({
             url: "https://api.themoviedb.org/3/" + movieOrTv + "/" + movieId + "/credits?api_key=de7bfe759d702ca3a0225b7b3285f2b3",
             method: "GET"
@@ -256,16 +266,54 @@ $(document).ready(function () {
                 console.log(movieInfo.cast[i].name);
                 $('body').append(movieInfo.cast[i].name);
             }
-           
+            displayAll(movieRow);
+            getGiphys(title);
         });
-    };
-
-
-
-
-    //Url for the movie poster https://image.tmdb.org/t/p/w600_and_h900_bestv2/pTpxQB1N0waaSc3OSn0e9oc8kx9.jpg
-    //Obtain url .jpg link from array of results results[i].poster_path
-
-
-
+    }
 });
+
+function displayAll(movieRow){
+    var movieorTvPoster = $(movieRow).attr('posterURL');
+    var movieorTvTitle = $(movieRow).attr('movieOrTvTitle');
+    var date = $(movieRow).attr('date');
+    var overview = $(movieRow).attr('overview');
+    // var cast = $(movieRow).attr('');
+    $('body').prepend(overview);
+    $('body').prepend("Release Date" + date);
+    $('body').prepend(movieorTvTitle);
+    $('body').prepend("<img src='" + movieorTvPoster + "'width=100></img>");
+};
+
+
+function getGiphys(title) {
+    
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=9eYxjIxpJY0AYEPAItWXZnXl50byaqGu&limit=6";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        
+        var results = response.data;
+        console.log(response.data)
+        for (var i = 0; i < results.length; i++) {
+            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                var gifImage = $("<img></img>");
+                // var p = $("<p>");
+                // p.text("Rating: " + results[i].rating);
+                gifImage.attr("src", results[i].images.fixed_height.url); //sets the source to the img element
+                gifImage.addClass("gif"); //add the class gif for on.click identification
+                gifImage.attr("width", "50px");
+                $("body").append(gifImage);
+                console.log(results[i].rating);
+            }
+        }
+    })
+}
+
+
+
+
+
+//Url for the movie poster https://image.tmdb.org/t/p/w600_and_h900_bestv2/pTpxQB1N0waaSc3OSn0e9oc8kx9.jpg
+//Obtain url .jpg link from array of results results[i].poster_path
