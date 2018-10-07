@@ -215,7 +215,7 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response5) {
             for (i = 0; i < response5.results.length; i++) {
-                $('#button-area').empty();
+                $('button-area').empty();
                 var row = $("<tr class='castInfo'>");
                 var movieId = response5.results[i].id;
                 row.attr('movieId', movieId);
@@ -236,7 +236,7 @@ $(document).ready(function () {
                     row.attr('overview', response5.results[i].overview);
                     row.attr('date', response5.results[i].first_air_date);
                 }
-                $('tbody').append(row);
+                $('#button-area').append(row);
                 console.log(response5.results[i].poster_path); //poster
                 console.log(response5.results[i].title); //movie title
                 console.log(response5.results[i].release_date); //release date
@@ -249,7 +249,7 @@ $(document).ready(function () {
     };
 
     $(document).on('click', '.castInfo', function () {
-        $('body').empty();
+        $('#button-area').empty();
         getCreditsData(this);
     });
 
@@ -264,7 +264,7 @@ $(document).ready(function () {
             console.log(movieInfo);
             for (i = 0; i < 5; i++) {
                 console.log(movieInfo.cast[i].name);
-                $('body').append(movieInfo.cast[i].name);
+                $('#button-area').append(movieInfo.cast[i].name);
             }
             displayAll(movieRow);
             getGiphys(title);
@@ -278,10 +278,10 @@ function displayAll(movieRow){
     var date = $(movieRow).attr('date');
     var overview = $(movieRow).attr('overview');
     // var cast = $(movieRow).attr('');
-    $('body').prepend(overview);
-    $('body').prepend("Release Date" + date);
-    $('body').prepend(movieorTvTitle);
-    $('body').prepend("<img src='" + movieorTvPoster + "'width=100></img>");
+    $('#button-area').prepend(overview);
+    $('#button-area').prepend("Release Date" + date);
+    $('#button-area').prepend(movieorTvTitle);
+    $('#button-area').prepend("<img src='" + movieorTvPoster + "'width=100></img>");
 };
 
 
@@ -304,7 +304,7 @@ function getGiphys(title) {
                 gifImage.attr("src", results[i].images.fixed_height.url); //sets the source to the img element
                 gifImage.addClass("gif"); //add the class gif for on.click identification
                 gifImage.attr("width", "50px");
-                $("body").append(gifImage);
+                $('#button-area').append(gifImage);
                 console.log(results[i].rating);
             }
         }
