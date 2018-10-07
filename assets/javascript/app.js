@@ -214,8 +214,8 @@ $(document).ready(function () {
             url: "https://api.themoviedb.org/3/discover/" + movieOrTv + "?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&" + decadeData + "&with_genres=" + genreData + "",
             method: "GET"
         }).then(function (response5) {
+            $('#button-area').empty();
             for (i = 0; i < response5.results.length; i++) {
-                $('button-area').empty();
                 var row = $("<tr class='castInfo'>");
                 var movieId = response5.results[i].id;
                 row.attr('movieId', movieId);
