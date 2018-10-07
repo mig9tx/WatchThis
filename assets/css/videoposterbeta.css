@@ -20,28 +20,28 @@
 .container {
     margin: 0 auto;
     font-family: 'Notable', sans-serif;
-    background: rgba(0,0,0,0.9);
-    color: #fffff0;
-    padding: 50px;
+    background: rgba(0,0,0,0.7);
+    color: #ffffff;
+    padding: 30px;
     font-size: 20px;
     letter-spacing: 2px;
-    opacity: .9;
+    opacity: .7;
 }
 
 /* Overriding Bootstrap CSS to have the Navbar match the container */
 .navbar-custom {
     background: rgba(0,0,0,0);
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 /* Overriding Bootstrap CSS to have Nav Brand next to logo be white */
 .navbar-brand {
-    color: #fffff0;
+    color: #ffffff;
 }
 
 /* Overriding Bootstrap CSS to have Nav links be white */
 .nav-link {
-    color: #fffff0;
+    color: #ffffff;
 }
 
 /* Overriding Bootstrap CSS to have Nav links turn gold when you hover over them */
@@ -52,18 +52,23 @@
 /* Centering the middle row of text */
 .row2 {
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
 }
 
 .row3 {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 
+.row4 {
+    align-content: center;
+    padding-bottom: 5px;
+}
+    
 /* Start and subsequent button styling */
 .button-success {
     border: 3px solid black;
     background: rgba(0,0,0,0);
-    color: #fffff0;
+    color: #ffffff;
     padding: 14px 28px;
     font-family: 'Notable', sans-serif;
     font-size: 16px;
@@ -75,7 +80,7 @@
 /* Gradient and font colors when hovering over button */
 .button-success:hover {
     background: linear-gradient(to right, #074C00, #42A341, #B8E2A3);
-    color: #fffff0;
+    color: #ffffff;
 }
 
 /* Speed of hover effect */

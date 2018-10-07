@@ -28,8 +28,8 @@
 
         <!-- Video element to play in background throughout UX -->
         <div class="banner">
-            <video poster="./assets/images/redcurtainloop.mp4" class="banner__video" playsinline autoplay muted loop>
-                <source src="./assets/images/redcurtainloop.mp4" type="video/webm">
+            <video poster="./assets/images/redcurtainshq.mp4" class="banner__video" playsinline autoplay muted loop>
+                <source src="./assets/images/redcurtainshq.mp4" type="video/webm">
             </video>
         </div>
 
@@ -79,7 +79,7 @@
                                         <div class="source">- Your Instructor</div>
                                     </li>
                                     <li class="anim3">
-                                        <div class="quote">"WE DON'T EVEN #NETFLIXANDCHILL ANYMORE."</div>
+                                        <div class="quote">"WE DON'T EVEN NETFLIX AND CHILL ANYMORE."</div>
                                         <div class="source">- Bae</div>
                                     </li>
                                     <li class="anim4">
@@ -105,17 +105,62 @@
                     <button class="button-success pure-button">START</button>
                 </div>
             </div>
+
+            <br>
+
+            <!-- Adding a buttons to Tweet using predetermined hashtags since we can't use Twitter API -->
+            <div class="row4">
+                <div class="col-sm-12 text-center">
+                    <marquee behavior=scroll direction="left" scrollamount="3">
+                        <!-- #WatchThisApp -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=WatchThisApp&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#WatchThisApp</a>
+                        <!-- #tvSuggestions -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=tvSuggestions&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#tvSuggestions</a>
+                        <!-- #movieSuggestions -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=movieSuggestions&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#movieSuggestions</a>
+                        <!-- #NetflixAndChill -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=NetflixAndChill&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#NetflixAndChill</a>
+                        <!-- #HuluSuggestions -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=HuluSuggestions&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#HuluSuggestions</a>
+                        <!-- #WhatToWatch -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=WhatToWatch&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#WhatToWatch</a>
+                        <!-- #80sMovies -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=80sMovies&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#80sMovies</a>
+                        <!-- #bestshow -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=bestshow&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#bestshow</a>
+                        <!-- #TVseries -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=TVseries&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#TVseries</a>
+                    </marquee>
+                </div>
+            </div>
+
+            <div class="row5">
+                <div class="col-sm-12 text-center">
+                    <a href="https://twitter.com/WatchThisApp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @WatchThisApp</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+
         </div>
-    </div><!--  -->
+    </div>
+    <!--  -->
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <!-- Local Javascript -->
-    <script src="assets/javascript/app.js>"></script> 
+    <script src="assets/javascript/app.js"></script>
     <!-- Genres and Decades List -->
     <script src="assets/javascript/GenresAndDecadeslist.js"></script>
+    <!-- Twitter Widget -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 
-</html >
+</html>
