@@ -1,6 +1,6 @@
 /* Adding space between the div w/ container and the tiop of the page */
 .wrapper {
-    padding-top: 8%;
+    padding-top: 7%;
 }
 
 /* Configured background video poster to cover the full web page */
@@ -31,6 +31,7 @@
 /* Overriding Bootstrap CSS to have the Navbar match the container */
 .navbar-custom {
     background: rgba(0,0,0,0);
+    padding-bottom: 20px;
 }
 
 /* Overriding Bootstrap CSS to have Nav Brand next to logo be white */
@@ -51,6 +52,11 @@
 /* Centering the middle row of text */
 .row2 {
     text-align: center;
+    padding-bottom: 20px;
+}
+
+.row3 {
+    padding-bottom: 40px;
 }
 
 /* Start and subsequent button styling */
