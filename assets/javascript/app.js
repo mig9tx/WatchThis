@@ -102,7 +102,8 @@ $(document).ready(function () {
             var decadeButtons = $('<button>');
             decadeButtons.addClass('button decade-buttons');
             decadeButtons.attr('data-id', decades[i].id);
-            decadeButtons.text(decades[i].name); 
+            decadeButtons.attr('movieOrTv', 'movie'); //value for url
+            decadeButtons.text(decades[i].name);
             $('#button-area').append(decadeButtons);
         }
     }
@@ -113,19 +114,22 @@ $(document).ready(function () {
             var decadeButtons = $('<button>');
             decadeButtons.addClass('button decade-buttons');
             decadeButtons.attr('data-id', decades[i].id);
+            decadeButtons.attr('movieOrTv', 'tv'); //value for url
             decadeButtons.text(decades[i].name);
             $('#button-area').append(decadeButtons);
         }
     }
 
     function getGenreData(btn) {
-        var genreData = $(btn).attr('data-id');
+        genreData = $(btn).attr('data-id');
         console.log(genreData);
     }
 
     function getDecadeData(btn) {
-        var decadeData = $(btn).attr('data-id');
+        decadeData = $(btn).attr('data-id');
+        movieOrTv = $(btn).attr('movieOrTv');
         console.log(decadeData);
+        console.log(movieOrTv);
     }
 
     //CLICK EVENTS
@@ -153,24 +157,24 @@ $(document).ready(function () {
     $(document).on('click', '.movieGenreButtons', function () {
         getGenreData(this);
 
-    });     
+    });
 
     $(document).on('click', '.tvGenreButtons', function () {
         getGenreData(this);
 
     });
 
-    $(document).on('click', '.tvGenreButtons', function(){
+    $(document).on('click', '.tvGenreButtons', function () {
         displayTvDecadeButtons();
     });
 
-    $(document).on('click', '.movieGenreButtons', function(){
+    $(document).on('click', '.movieGenreButtons', function () {
         displayMovieDecadeButtons();
     });
 
     $(document).on('click', '.decade-buttons', function () {
         getDecadeData(this);
-
+        getMovieData();
     });
 
     //intro screen
@@ -198,58 +202,64 @@ $(document).ready(function () {
     //It also will display the top 10 choices in descenting popularity
     //displayed as buttons with images of the posters
 
-    var movieId = "105";
-    var decade = "release_date.gte=1980-01-01&release_date.lte=1989-12-30";
-    
-    //Genre Ids:
-    // 
-    var genreId = "35";
-    movieInfo = '';
+
+    var decadeData = "";
+    var genreData = "";
+    var movieOrTv = "";
+
 
     // query that searches for movies in a specific decade and genre
-    $.ajax({
-        url: "https://api.themoviedb.org/3/discover/movie?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=10&" + decade + "&with_genres=" + genreId + "",
-        method: "GET"
-    }).then(function (response5) {
-        for (i = 0; i < response5.results.length; i++) {
-        var row = $("<tr>");
-        row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + response5.results[i].poster_path + "'width='60px' length='90px'>'</img></td>");
-        row.append("<td>" + response5.results[i].title + "</td>");
-        row.append("<td>" + response5.results[i].release_date + "</td>");
-        $('tbody').append(row);
-        
-        console.log(response5.results[0].poster_path); //poster
-        console.log(response5.results[0].title); //movie title
-        console.log(response5.results[0].release_date); //release date
-        console.log(response5.results[0].overview); //overview
-        console.log(response5.results[0].id); //movie id to be used to pull more information about the movie
+    function getMovieData() {
+        $.ajax({
+            url: "https://api.themoviedb.org/3/discover/" + movieOrTv + "?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&" + decadeData + "&with_genres=" + genreData + "",
+            method: "GET"
+        }).then(function (response5) {
+            for (i = 0; i < response5.results.length; i++) {
+                $('#button-area').empty();
+                var row = $("<tr class='castInfo'>");
+                var movieId = response5.results[i].id;
+                row.attr('movieId', movieId);
+                row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + response5.results[i].poster_path + "' width='60px' length='90px'></img></td>");
+                if (movieOrTv === "movie"){
+                row.append("<td>" + response5.results[i].title + "</td>");
+                row.append("<td>" + response5.results[i].release_date + "</td>");
+                }else {
+                    row.append("<td>" + response5.results[i].name + "</td>");
+                    row.append("<td>" + response5.results[i].first_air_date + "</td>");
+                }
+                $('tbody').append(row);
+                console.log(response5.results[i].poster_path); //poster
+                console.log(response5.results[i].title); //movie title
+                console.log(response5.results[i].release_date); //release date
+                console.log(response5.results[i].overview); //overview
+                console.log(response5.results[i].id); //movie id to be used to pull more information about the movie
+            }
+            console.log(response5);
 
-        console.log(response5);
-        }
+        });
+    };
+
+    $(document).on('click', '.castInfo', function () {
+        $('body').empty();
+        getCreditsData(this);
     });
 
     // gets a list of credits where we can obtain the list of actors in a specific movie
-    $.ajax({
-        url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=de7bfe759d702ca3a0225b7b3285f2b3",
-        method: "GET"
-    }).then(function (movieInfo) {
+    function getCreditsData(movieRow) {
+        var movieId = $(movieRow).attr('movieId');
+        $.ajax({
+            url: "https://api.themoviedb.org/3/" + movieOrTv + "/" + movieId + "/credits?api_key=de7bfe759d702ca3a0225b7b3285f2b3",
+            method: "GET"
+        }).then(function (movieInfo) {
+            console.log(movieInfo);
+            for (i = 0; i < 5; i++) {
+                console.log(movieInfo.cast[i].name);
+                $('body').append(movieInfo.cast[i].name);
+            }
+           
+        });
+    };
 
-        console.log(movieInfo.cast[0].name);
-        console.log(movieInfo.cast[1].name);
-        console.log(movieInfo.cast[2].name);
-        console.log(movieInfo.cast[3].name);
-        console.log(movieInfo.cast[4].name);
-        console.log(movieInfo);
-    });
-
-    // query that searches for tv show based on genre
-    $.ajax({
-        url: "https://api.themoviedb.org/3/discover/tv?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genreId + "",
-
-        method: "GET"
-    }).then(function (response2) {
-        console.log(response2);
-    });
 
 
 
