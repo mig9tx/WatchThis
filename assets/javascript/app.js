@@ -314,6 +314,10 @@ function getGiphys(title) {
 
 
 
+<<<<<<< HEAD
 
 //Url for the movie poster https://image.tmdb.org/t/p/w600_and_h900_bestv2/pTpxQB1N0waaSc3OSn0e9oc8kx9.jpg
 //Obtain url .jpg link from array of results results[i].poster_path
+=======
+});
+>>>>>>> master

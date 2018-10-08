@@ -4,76 +4,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WatchThis!</title>
+    <title>WATCHTHIS!</title>
     <!-- Popcorn Favicon -->
     <link rel="icon" href="./assets/images/popcorn.png" type="image/png" sizes="16x16">
     <!-- Bootstrap Link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <!-- Pure CSS for buttons -->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+        crossorigin="anonymous">
     <!-- Local CSS Link -->
     <link rel="stylesheet" href="./assets/css/videoposterbeta.css">
+    <!-- Using Normalize CSS instead of Reset CSS it works better with this page -->
+    <link rel="stylesheet" href="./assets/css/normalize.css">
     <!-- Movie Style Font for clickbox main text -->
     <link href="https://fonts.googleapis.com/css?family=Notable" rel="stylesheet" type="text/css">
-    <!-- Font for WATCHTHIS! H1 -->
-    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
-
-    
-    
-
 </head>
 
 <body>
 
-       
-  
-    <div class="container">
+    <!-- Putting the whole "floating application" we are gloing for in a wrapper -->
+    <div class="wrapper">
 
-        <!--Row 1 (nav)-->
-        <div class="row">
-            <div class="col-sm-12">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">
-                        <img class="logo" src="http://bootstrap-ecommerce.com/main/images/logo-white.png" height="40"> LOGO</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbarNav" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbar1">
-                        <ul class="navbar-nav ml-auto">
+        <!-- Video element to play in background throughout UX -->
+        <div class="banner">
+            <video poster="./assets/images/bluecurtains.mp4" class="banner__video" playsinline autoplay muted loop>
+                <source src="./assets/images/bluecurtains.mp4" type="video/webm">
+            </video>
+        </div>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="html-components.html"> Previous </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="html-components.html"> Next </a>
-                            </li>
+        <!-- Container to include all components, from Navbar, text, images, buttons, etc for mobile responsiveness -->
+        <div class="container">
+
+            <!-- Row 1 (Navbar) -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <nav class="navbar navbar-custom navbar-expand-lg">
+                        <a class="navbar-brand" href="#">
+                            <!-- Add custom logo to route user back to homepage on click -->
+                            <img class="logo" src="./assets/images/dramamasks.png" height="64">&nbsp;WATCHTHIS!</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbar1">
+                            <ul class="navbar-nav ml-auto">
+                                <!-- Allows users to click "Previous" or "Next" in case they want to change a selection -->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Previous</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Next</a>
+                                </li>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Row 2 (Landing page info encouraging visitors to click start) -->
+            <div class="row2">
+                <div class="col-sm-12">
+                    <div class="content-slider">
+                        <div class="slider">
+                            <div class="mask">
+                                <ul>
+                                    <!-- Text Carousel of fake/funny quotes to entice visitors to give the site a try -->
+                                    <li class="anim1">
+                                        <div class="quote">"I CAN'T DECIDE WHAT TO WATCH! FML!"</div>
+                                        <div class="source">- You... pretty much all the time</div>
+                                    </li>
+                                    <!-- Using a list class for the animation, and separating quote and source into different classes for styling -->
+                                    <li class="anim2">
+                                        <div class="quote">"I'M IN A SHOW HOLE."</div>
+                                        <div class="source">- Your Instructor</div>
+                                    </li>
+                                    <li class="anim3">
+                                        <div class="quote">"WE DON'T EVEN NETFLIX AND CHILL ANYMORE."</div>
+                                        <div class="source">- Bae</div>
+                                    </li>
+                                    <li class="anim4">
+                                        <div class="quote">"SEEN ANY GOOD MOVIES LATELY?"</div>
+                                        <div class="source">- Chelsea from Marketing</div>
+                                    </li>
+                                    <li class="anim5">
+                                        <div class="quote">"HAVE NO FEAR, WATCHTHIS! IS HERE."</div>
+                                        <div class="source">- Wired, TechCrunch, Mark Zuckerberg (any day now)</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </nav>
+                </div>
             </div>
-        </div>
 
-        <br>
+            <br>
 
-        <!-- Row 2 (Questionnare) -->
-        <div class="row">
-            <div class="col-sm-12">
-                <p>DON'T KNOW WHAT TO WATCH? ON A #SHOWHOLE? NO TIME TO #NETFLIXANDCHILL? HAVE NO FEAR, WATCHTHIS IS HERE</p>
+            <!-- Start button that will be used to remove, fill, and change survey questions and results using Javascript -->
+            <div class="row3">
+                <div class="col-sm-12 text-center">
+                    <button class="button-success pure-button">START</button>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <button id="button-area"><!-- START --></button>
+            <br>
+
+            <!-- Adding a buttons to Tweet using predetermined hashtags since we can't use Twitter API -->
+            <div class="row4">
+                <div class="col-sm-12 text-center">
+                    <marquee behavior=scroll direction="left" scrollamount="3">
+                        <!-- #WatchThisApp -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=WatchThisApp&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#WatchThisApp</a>
+                        <!-- #tvSuggestions -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=tvSuggestions&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#tvSuggestions</a>
+                        <!-- #movieSuggestions -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=movieSuggestions&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#movieSuggestions</a>
+                        <!-- #NetflixAndChill -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=NetflixAndChill&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#NetflixAndChill</a>
+                        <!-- #HuluSuggestions -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=HuluSuggestions&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#HuluSuggestions</a>
+                        <!-- #WhatToWatch -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=WhatToWatch&ref_src=twsrc%5Etfw" class="twitter-hashtag-button"
+                            data-show-count="false">#WhatToWatch</a>
+                        <!-- #80sMovies -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=80sMovies&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#80sMovies</a>
+                        <!-- #bestshow -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=bestshow&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#bestshow</a>
+                        <!-- #TVseries -->
+                        <a href="https://twitter.com/intent/tweet?button_hashtag=TVseries&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">#TVseries</a>
+                    </marquee>
+                </div>
             </div>
-        </div>
 
+            <!-- Twitter Follow Button -->
+            <div class="row5">
+                <div class="col-sm-12 text-center">
+                    <a href="https://twitter.com/WatchThisApp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @WatchThisApp</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+
+        </div>
     </div>
+    <!--  -->
 
-
-
-    <!-- Scripts -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Local Javascript -->
+    <script src="assets/javascript/app.js"></script>
+    <!-- Genres and Decades List -->
+    <script src="assets/javascript/GenresAndDecadeslist.js"></script>
+    <!-- Twitter Widget -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 
