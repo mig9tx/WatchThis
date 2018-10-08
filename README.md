@@ -1,13 +1,17 @@
 # Group_Project_1
 
-"What Should I Watch?" (Title)
+"Watch This App!" 
 
-Users will participate in a questionnare.
+Users will participate in a questionare that will suggest what to watch. 
 
-Questions will ask the user if they're interested in either a TV show, or movie.
+Throughout this media query, users will navigate through a series of buttons. (Easiest Quiz Ever, not much brainstorming involved). 
 
-Ask questions on interest in genres (Putting Genres into buttons?). We will provide a list of genres (action, comedy, drama, romance, horror).
+The buttons will generate responses based off of what users select going forward. Whether they're interested in either a tv show, or a movie recommendation, that is up to the quiz taker. 
 
-Maybe, make it specific to an actor, or decade (80's romance, 90's comedy).
+Midway into the questionnare, users will be asked questions on their interest in genres. We will provide a list of genres in the form of buttons (action, comedy, drama, romance, horror, etc). 
 
-Final screen will illustrate series of results. Results will show genres interest, TV show and movie suggestions.
+The final screen will illustrate series of results. Results will show genres interest, tv show and movie suggestions. 
+
+The link for Trello: https://trello.com/b/qEqq5nbi/uthou201808-project-1-movie-show-finder 
+
+The link for our Twitter Page: https://twitter.com/WatchThisApp
