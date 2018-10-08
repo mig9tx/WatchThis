@@ -102,7 +102,8 @@ $(document).ready(function () {
             var decadeButtons = $('<button>');
             decadeButtons.addClass('button decade-buttons');
             decadeButtons.attr('data-id', decades[i].id);
-            decadeButtons.text(decades[i].name); 
+            decadeButtons.attr('movieOrTv', 'movie'); //value for url
+            decadeButtons.text(decades[i].name);
             $('#button-area').append(decadeButtons);
         }
     }
@@ -113,19 +114,22 @@ $(document).ready(function () {
             var decadeButtons = $('<button>');
             decadeButtons.addClass('button decade-buttons');
             decadeButtons.attr('data-id', decades[i].id);
+            decadeButtons.attr('movieOrTv', 'tv'); //value for url
             decadeButtons.text(decades[i].name);
             $('#button-area').append(decadeButtons);
         }
     }
 
     function getGenreData(btn) {
-        var genreData = $(btn).attr('data-id');
+        genreData = $(btn).attr('data-id');
         console.log(genreData);
     }
 
     function getDecadeData(btn) {
-        var decadeData = $(btn).attr('data-id');
+        decadeData = $(btn).attr('data-id');
+        movieOrTv = $(btn).attr('movieOrTv');
         console.log(decadeData);
+        console.log(movieOrTv);
     }
 
     //CLICK EVENTS
@@ -153,24 +157,24 @@ $(document).ready(function () {
     $(document).on('click', '.movieGenreButtons', function () {
         getGenreData(this);
 
-    });     
+    });
 
     $(document).on('click', '.tvGenreButtons', function () {
         getGenreData(this);
 
     });
 
-    $(document).on('click', '.tvGenreButtons', function(){
+    $(document).on('click', '.tvGenreButtons', function () {
         displayTvDecadeButtons();
     });
 
-    $(document).on('click', '.movieGenreButtons', function(){
+    $(document).on('click', '.movieGenreButtons', function () {
         displayMovieDecadeButtons();
     });
 
     $(document).on('click', '.decade-buttons', function () {
         getDecadeData(this);
-
+        getMovieData();
     });
 
     //intro screen
@@ -198,65 +202,122 @@ $(document).ready(function () {
     //It also will display the top 10 choices in descenting popularity
     //displayed as buttons with images of the posters
 
-    var movieId = "105";
-    var decade = "release_date.gte=1980-01-01&release_date.lte=1989-12-30";
-    
-    //Genre Ids:
-    // 
-    var genreId = "35";
-    movieInfo = '';
 
-    // query that searches for movies in a specific decade and genre
-    $.ajax({
-        url: "https://api.themoviedb.org/3/discover/movie?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=10&" + decade + "&with_genres=" + genreId + "",
-        method: "GET"
-    }).then(function (response5) {
-        for (i = 0; i < response5.results.length; i++) {
-        var row = $("<tr>");
-        row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + response5.results[i].poster_path + "'width='60px' length='90px'>'</img></td>");
-        row.append("<td>" + response5.results[i].title + "</td>");
-        row.append("<td>" + response5.results[i].release_date + "</td>");
-        $('tbody').append(row);
-        
-        console.log(response5.results[0].poster_path); //poster
-        console.log(response5.results[0].title); //movie title
-        console.log(response5.results[0].release_date); //release date
-        console.log(response5.results[0].overview); //overview
-        console.log(response5.results[0].id); //movie id to be used to pull more information about the movie
+    var decadeData = "";
+    var genreData = "";
+    var movieOrTv = "";
 
-        console.log(response5);
-        }
+
+    // query that searches for movies or tv shows in a specific decade and genre
+    function getMovieData() {
+        $.ajax({
+            url: "https://api.themoviedb.org/3/discover/" + movieOrTv + "?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&" + decadeData + "&with_genres=" + genreData + "",
+            method: "GET"
+        }).then(function (response5) {
+            $('#button-area').empty();
+            for (i = 0; i < response5.results.length; i++) {
+                var row = $("<tr class='castInfo'>");
+                var movieId = response5.results[i].id;
+                row.attr('movieId', movieId);
+                row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2" + response5.results[i].poster_path + "' width='60px' length='90px'></img></td>");
+                if (movieOrTv === "movie") {
+                    row.append("<td>" + response5.results[i].title + "</td>");
+                    row.append("<td>" + response5.results[i].release_date + "</td>");
+                    row.attr('movieOrTvTitle', response5.results[i].title);
+                    row.attr('posterURL', 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + response5.results[i].poster_path);
+                    row.attr('overview', response5.results[i].overview);
+                    row.attr('date', response5.results[i].release_date);
+
+                } else {
+                    row.append("<td>" + response5.results[i].name + "</td>");
+                    row.append("<td>" + response5.results[i].first_air_date + "</td>");
+                    row.attr('movieOrTvTitle', response5.results[i].name);
+                    row.attr('posterURL', 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + response5.results[i].poster_path);
+                    row.attr('overview', response5.results[i].overview);
+                    row.attr('date', response5.results[i].first_air_date);
+                }
+                $('#button-area').append(row);
+                console.log(response5.results[i].poster_path); //poster
+                console.log(response5.results[i].title); //movie title
+                console.log(response5.results[i].release_date); //release date
+                console.log(response5.results[i].overview); //overview
+                console.log(response5.results[i].id); //movie id to be used to pull more information about the movie
+            }
+            console.log(response5);
+
+        });
+    };
+
+    $(document).on('click', '.castInfo', function () {
+        $('#button-area').empty();
+        getCreditsData(this);
     });
 
     // gets a list of credits where we can obtain the list of actors in a specific movie
-    $.ajax({
-        url: "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=de7bfe759d702ca3a0225b7b3285f2b3",
-        method: "GET"
-    }).then(function (movieInfo) {
-
-        console.log(movieInfo.cast[0].name);
-        console.log(movieInfo.cast[1].name);
-        console.log(movieInfo.cast[2].name);
-        console.log(movieInfo.cast[3].name);
-        console.log(movieInfo.cast[4].name);
-        console.log(movieInfo);
-    });
-
-    // query that searches for tv show based on genre
-    $.ajax({
-        url: "https://api.themoviedb.org/3/discover/tv?api_key=de7bfe759d702ca3a0225b7b3285f2b3&language=en-US&region=US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" + genreId + "",
-
-        method: "GET"
-    }).then(function (response2) {
-        console.log(response2);
-    });
-
-
-
-    //Url for the movie poster https://image.tmdb.org/t/p/w600_and_h900_bestv2/pTpxQB1N0waaSc3OSn0e9oc8kx9.jpg
-    //Obtain url .jpg link from array of results results[i].poster_path
-
-
-
-
+    function getCreditsData(movieRow) {
+        var movieId = $(movieRow).attr('movieId');
+        var title = $(movieRow).attr("movieOrTvTitle");
+        $.ajax({
+            url: "https://api.themoviedb.org/3/" + movieOrTv + "/" + movieId + "/credits?api_key=de7bfe759d702ca3a0225b7b3285f2b3",
+            method: "GET"
+        }).then(function (movieInfo) {
+            console.log(movieInfo);
+            for (i = 0; i < 5; i++) {
+                console.log(movieInfo.cast[i].name);
+                $('#button-area').append(movieInfo.cast[i].name);
+            }
+            displayAll(movieRow);
+            getGiphys(title);
+        });
+    }
 });
+
+function displayAll(movieRow) {
+    var movieorTvPoster = $(movieRow).attr('posterURL');
+    var movieorTvTitle = $(movieRow).attr('movieOrTvTitle');
+    var date = $(movieRow).attr('date');
+    var overview = $(movieRow).attr('overview');
+    // var cast = $(movieRow).attr('');
+    $('#button-area').prepend(overview);
+    $('#button-area').prepend("Release Date" + date);
+    $('#button-area').prepend(movieorTvTitle);
+    $('#button-area').prepend("<img src='" + movieorTvPoster + "'width=100></img>");
+};
+
+
+function getGiphys(title) {
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=9eYxjIxpJY0AYEPAItWXZnXl50byaqGu&limit=6";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+
+        var results = response.data;
+        console.log(response.data)
+        for (var i = 0; i < results.length; i++) {
+            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                var gifImage = $("<img></img>");
+                // var p = $("<p>");
+                // p.text("Rating: " + results[i].rating);
+                gifImage.attr("src", results[i].images.fixed_height.url); //sets the source to the img element
+                gifImage.addClass("gif"); //add the class gif for on.click identification
+                gifImage.attr("width", "50px");
+                $('#button-area').append(gifImage);
+                console.log(results[i].rating);
+            }
+        }
+    })
+}
+
+
+
+
+<<<<<<< HEAD
+
+//Url for the movie poster https://image.tmdb.org/t/p/w600_and_h900_bestv2/pTpxQB1N0waaSc3OSn0e9oc8kx9.jpg
+//Obtain url .jpg link from array of results results[i].poster_path
+=======
+});
+>>>>>>> master
