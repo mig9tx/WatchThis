@@ -272,7 +272,7 @@ $(document).ready(function () {
     }
 });
 
-function displayAll(movieRow){
+function displayAll(movieRow) {
     var movieorTvPoster = $(movieRow).attr('posterURL');
     var movieorTvTitle = $(movieRow).attr('movieOrTvTitle');
     var date = $(movieRow).attr('date');
@@ -286,14 +286,14 @@ function displayAll(movieRow){
 
 
 function getGiphys(title) {
-    
+
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=9eYxjIxpJY0AYEPAItWXZnXl50byaqGu&limit=6";
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        
+
         var results = response.data;
         console.log(response.data)
         for (var i = 0; i < results.length; i++) {
