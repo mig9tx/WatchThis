@@ -1,4 +1,4 @@
-/* Adding space between the div w/ container and the tiop of the page */
+/* Adding space between the div w/ container and the top of the page */
 .wrapper {
     padding-top: 7%;
 }
@@ -20,12 +20,12 @@
 .container {
     margin: 0 auto;
     font-family: 'Notable', sans-serif;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.9);
     color: #ffffff;
     padding: 30px;
     font-size: 20px;
     letter-spacing: 2px;
-    opacity: .7;
+    opacity: .9;
 }
 
 /* Overriding Bootstrap CSS to have the Navbar match the container */
