@@ -65,7 +65,7 @@
 }
     
 /* Start and subsequent button styling */
-.button-success {
+.button {
     border: 3px solid black;
     background: rgba(0,0,0,0);
     color: #ffffff;
