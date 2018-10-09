@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     function initialPage() {
         $('#button-area').empty();
+        $('form').css('display', 'none');
         var startButton = $('<button>');
         startButton.addClass('button');
         startButton.attr('id', 'start-button');
@@ -134,7 +135,7 @@ $(document).ready(function () {
 
     //CLICK EVENTS
 
-    $('#start-button').on('click', function () {
+    $(document).on('click', '#start-button', function () {
         displayMovieOrTv();
     });
 
@@ -177,6 +178,10 @@ $(document).ready(function () {
         getMovieData();
     });
 
+    $(document).on('click', '.movieGenreButtons', function () {
+        event.preventDefault();
+    });
+
     //intro screen
     //brief description of app
     //begin or start button
@@ -215,28 +220,29 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response5) {
             $('#button-area').empty();
+            $('.content-slider').empty();
             for (i = 0; i < response5.results.length; i++) {
-                var row = $("<tr class='castInfo'>");
+                var row = $("<row class='castInfo'>");
                 var movieId = response5.results[i].id;
                 row.attr('movieId', movieId);
-                row.append("<td><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2" + response5.results[i].poster_path + "' width='60px' length='90px'></img></td>");
+                row.append("<column><img src='https://image.tmdb.org/t/p/w600_and_h900_bestv2" + response5.results[i].poster_path + "' width='100px' length='130px'></img></column>");
                 if (movieOrTv === "movie") {
-                    row.append("<td>" + response5.results[i].title + "</td>");
-                    row.append("<td>" + response5.results[i].release_date + "</td>");
+                    // row.append("<td>" + response5.results[i].title + "</td>");
+                    // row.append("<td>" + response5.results[i].release_date + "</td>");
                     row.attr('movieOrTvTitle', response5.results[i].title);
                     row.attr('posterURL', 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + response5.results[i].poster_path);
                     row.attr('overview', response5.results[i].overview);
                     row.attr('date', response5.results[i].release_date);
 
                 } else {
-                    row.append("<td>" + response5.results[i].name + "</td>");
-                    row.append("<td>" + response5.results[i].first_air_date + "</td>");
+                    // row.append("<td>" + response5.results[i].name + "</td>");
+                    // row.append("<td>" + response5.results[i].first_air_date + "</td>");
                     row.attr('movieOrTvTitle', response5.results[i].name);
                     row.attr('posterURL', 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + response5.results[i].poster_path);
                     row.attr('overview', response5.results[i].overview);
                     row.attr('date', response5.results[i].first_air_date);
                 }
-                $('#button-area').append(row);
+                $('.content-slider').append(row);
                 console.log(response5.results[i].poster_path); //poster
                 console.log(response5.results[i].title); //movie title
                 console.log(response5.results[i].release_date); //release date
@@ -264,7 +270,7 @@ $(document).ready(function () {
             console.log(movieInfo);
             for (i = 0; i < 5; i++) {
                 console.log(movieInfo.cast[i].name);
-                $('#button-area').append(movieInfo.cast[i].name);
+                $('#button-area').append(movieInfo.cast[i].name + '<br>');
             }
             displayAll(movieRow);
             getGiphys(title);
@@ -278,11 +284,20 @@ function displayAll(movieRow) {
     var date = $(movieRow).attr('date');
     var overview = $(movieRow).attr('overview');
     // var cast = $(movieRow).attr('');
-    $('#button-area').prepend(overview);
-    $('#button-area').prepend("Release Date" + date);
-    $('#button-area').prepend(movieorTvTitle);
-    $('#button-area').prepend("<img src='" + movieorTvPoster + "'width=100></img>");
+    // var form = $('form').css('display', 'block');
+    // $('#button-area').prepend(form);
+    $('#button-area').prepend('<p>' + overview + '</p>');
+    $('#button-area').prepend("<p>Release Date" + date + '</p>');
+    $('#button-area').prepend('<p>' + movieorTvTitle + '</p>');
+    $('#button-area').prepend("<p><img src='" + movieorTvPoster + "'width=100></img><p>");
+    displayForm();
+    
 };
+
+function displayForm (){
+    var form = $('form').css('display', 'block');
+    $('#button-area').append('<br>' + form);
+}
 
 
 function getGiphys(title) {
@@ -298,7 +313,7 @@ function getGiphys(title) {
         console.log(response.data)
         for (var i = 0; i < results.length; i++) {
             if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                var gifImage = $("<img></img>");
+                var gifImage = $("<p><img></img></p>");
                 // var p = $("<p>");
                 // p.text("Rating: " + results[i].rating);
                 gifImage.attr("src", results[i].images.fixed_height.url); //sets the source to the img element
@@ -311,13 +326,3 @@ function getGiphys(title) {
     })
 }
 
-
-
-
-<<<<<<< HEAD
-
-//Url for the movie poster https://image.tmdb.org/t/p/w600_and_h900_bestv2/pTpxQB1N0waaSc3OSn0e9oc8kx9.jpg
-//Obtain url .jpg link from array of results results[i].poster_path
-=======
-});
->>>>>>> master
