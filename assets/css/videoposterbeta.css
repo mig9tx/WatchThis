@@ -1,6 +1,10 @@
+body {
+  background: rgba(0,0,0,0.9);
+}
+
 /* Adding space between the div w/ container and the top of the page */
 .wrapper {
-    padding-top: 7%;
+    padding-top: 5%;
 }
 
 /* Configured background video poster to cover the full web page */
@@ -16,11 +20,26 @@
     z-index: -1;
 }
 
+/* Configured background video poster to cover the full web page */
+.banner__video2 {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  min-width: 100%;
+  height: auto;
+  min-height: 100%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: -1;
+}
+
 /* Style properties for the main container with an opaque background so you can still see the video */
-.container {
+.flex-container {
+    min-height: 100%;
+    width: 70%;
     margin: 0 auto;
     font-family: 'Notable', sans-serif;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,.9);
     color: #ffffff;
     padding: 30px;
     font-size: 20px;
@@ -46,7 +65,7 @@
 
 /* Overriding Bootstrap CSS to have Nav links turn gold when you hover over them */
 .navbar-nav > li > a:hover {
-    color: #E8C34B;
+    color: #0357B8;
 }
 
 /* Centering the middle row of text */
