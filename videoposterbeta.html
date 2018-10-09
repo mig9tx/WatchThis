@@ -12,7 +12,9 @@
         crossorigin="anonymous">
     <!-- Pure CSS for buttons -->
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+
         crossorigin="anonymous">    
+
     <!-- Using Normalize CSS instead of Reset CSS it works better with this page -->
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <!-- Local CSS Link -->
@@ -23,18 +25,18 @@
 
 <body>
 
-    <!-- Putting the whole "floating application" we are gloing for in a wrapper -->
-    <div class="wrapper">
-
-        <!-- Video element to play in background throughout UX -->
-        <div class="banner">
+       <!-- Video element to play in background throughout UX -->
+       <div class="banner">
             <video poster="./assets/images/bluecurtains.mp4" class="banner__video" playsinline autoplay muted loop>
                 <source src="./assets/images/bluecurtains.mp4" type="video/webm">
             </video>
         </div>
 
+    <!-- Putting the whole "floating application" we are gloing for in a wrapper -->
+    <div class="wrapper">
+        
         <!-- Container to include all components, from Navbar, text, images, buttons, etc for mobile responsiveness -->
-        <div class="container">
+        <div class="flex-container">
 
             <!-- Row 1 (Navbar) -->
             <div class="row">
@@ -45,11 +47,13 @@
                             <img class="logo" src="./assets/images/dramamasks.png" height="64">&nbsp;WATCHTHIS!</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1"
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <!-- <div class="collapse navbar-collapse" id="navbar1">
                             <ul class="navbar-nav ml-auto"> -->
                                 <!-- Allows users to click "Previous" or "Next" in case they want to change a selection -->
+
                                 <!-- <li class="nav-item">
                                     <a class="nav-link" href="#">Previous</a>
                                 </li>
@@ -57,6 +61,7 @@
                                     <a class="nav-link" href="#">Next</a>
                                 </li>
                         </div> -->
+
                     </nav>
                 </div>
             </div>
@@ -170,7 +175,7 @@
 
         </div>
     </div>
-    <!--  -->
+    <!-- TEST AREA FOR FLEX -->
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
