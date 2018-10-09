@@ -143,11 +143,6 @@ $(document).ready(function () {
         displayMovieGenreButtons();
     });
 
-    $(document).on('click', '.nav-link', function () {
-        // $('.content-slider').empty();
-        initialPage();
-    });
-
     $(document).on('click', '#tv-choice', function () {
         displayTvGenreButtons();
     });
