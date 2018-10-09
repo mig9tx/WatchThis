@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     function initialPage() {
         $('#button-area').empty();
-        $('form').css('display', 'none');
+        $('#input-form').hide();
         var startButton = $('<button>');
         startButton.addClass('button');
         startButton.attr('id', 'start-button');
@@ -276,53 +276,54 @@ $(document).ready(function () {
             getGiphys(title);
         });
     }
-});
 
-function displayAll(movieRow) {
-    var movieorTvPoster = $(movieRow).attr('posterURL');
-    var movieorTvTitle = $(movieRow).attr('movieOrTvTitle');
-    var date = $(movieRow).attr('date');
-    var overview = $(movieRow).attr('overview');
-    // var cast = $(movieRow).attr('');
-    // var form = $('form').css('display', 'block');
-    // $('#button-area').prepend(form);
-    $('#button-area').prepend('<p>' + overview + '</p>');
-    $('#button-area').prepend("<p>Release Date" + date + '</p>');
-    $('#button-area').prepend('<p>' + movieorTvTitle + '</p>');
-    $('#button-area').prepend("<p><img src='" + movieorTvPoster + "'width=300 height=450></img><p>");
-    displayForm();
-    
-};
-
-function displayForm (){
-    var form = $('form').css('display', 'block');
-    $('#button-area').append('<br>' + form);
-}
+    function displayAll(movieRow) {
+        var movieorTvPoster = $(movieRow).attr('posterURL');
+        var movieorTvTitle = $(movieRow).attr('movieOrTvTitle');
+        var date = $(movieRow).attr('date');
+        var overview = $(movieRow).attr('overview');
+        // var cast = $(movieRow).attr('');
+        // var form = $('form').css('display', 'block');
+        // $('#button-area').prepend(form);
+        $('#button-area').prepend('<p>' + overview + '</p>');
+        $('#button-area').prepend("<p>Release Date" + date + '</p>');
+        $('#button-area').prepend('<p>' + movieorTvTitle + '</p>');
+        $('#button-area').prepend("<p><img src='" + movieorTvPoster + "'width=300 height=450></img><p>");
+    };
 
 
-function getGiphys(title) {
+    function getGiphys(title) {
 
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=9eYxjIxpJY0AYEPAItWXZnXl50byaqGu&limit=6";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + title + "&api_key=9eYxjIxpJY0AYEPAItWXZnXl50byaqGu&limit=6";
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
 
-        var results = response.data;
-        console.log(response.data)
-        for (var i = 0; i < results.length; i++) {
-            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                var gifImage = $("<p><img></img></p>");
-                // var p = $("<p>");
-                // p.text("Rating: " + results[i].rating);
-                gifImage.attr("src", results[i].images.fixed_height.url); //sets the source to the img element
-                gifImage.addClass("gif"); //add the class gif for on.click identification
-                gifImage.attr("width", "50px");
-                $('#button-area').append(gifImage);
-                console.log(results[i].rating);
+            var results = response.data;
+            console.log(response.data)
+            for (var i = 0; i < results.length; i++) {
+                if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                    var gifImage = $("<img></img>");
+                    // var p = $("<p>");
+                    // p.text("Rating: " + results[i].rating);
+                    gifImage.attr("src", results[i].images.fixed_height.url); //sets the source to the img element
+                    gifImage.addClass("gif"); //add the class gif for on.click identification
+                    gifImage.attr("height", "100px");
+                    gifImage.attr("width", "150px");
+                    $('#button-area').append(gifImage);
+                    console.log(results[i].rating);
+                }
             }
-        }
-    })
-}
 
+            function displayForm() {
+                var form = $('#input-form').show();
+                $('#button-area').append("<br>", + form);
+            }
+            displayForm();
+        })
+    }
+
+
+});
