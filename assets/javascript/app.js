@@ -289,7 +289,7 @@ function displayAll(movieRow) {
     $('#button-area').prepend('<p>' + overview + '</p>');
     $('#button-area').prepend("<p>Release Date" + date + '</p>');
     $('#button-area').prepend('<p>' + movieorTvTitle + '</p>');
-    $('#button-area').prepend("<p><img src='" + movieorTvPoster + "'width=100></img><p>");
+    $('#button-area').prepend("<p><img src='" + movieorTvPoster + "'width=300 height=450></img><p>");
     displayForm();
     
 };
